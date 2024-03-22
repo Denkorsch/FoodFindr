@@ -1,18 +1,12 @@
-## Getting Started
+## FoodFindr
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+FoodFindr is an application for finding different recipes.
+You simply can add different ingredients and the application will
+show you recipes containing those ingredients.
+Furthermore you can inspect those recipes and learn about the exact ingredients
+you will need for it, including instructions.
+The recipes are taken from huge dataset with over 2 million recipes.
 
-## Folder Structure
+https://recipenlg.cs.put.poznan.pl/dataset
 
-The workspace contains two folders by default, where:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
