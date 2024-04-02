@@ -27,14 +27,17 @@ public class MainWindow extends JFrame implements ActionListener
 
     public MainWindow(Connector conn)
     {
+        //main window settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setSize(1000,800);
         this.setVisible(true);
         this.setResizable(false);
         this.setTitle("FoodFindr");
+
         con = conn;
         queryStm = "SELECT title FROM full_dataset_recipes WHERE";
+
         ingredientsAdd = new JTextField();
         submitButton = new JButton("+");
         ingredients = new ArrayList<JButton>();
@@ -42,14 +45,16 @@ public class MainWindow extends JFrame implements ActionListener
         ingredStrings = new ArrayList<String>();
         pIngred = new JPanel();
         pRecipes = new JPanel();
+        title = new JLabel("FoodFindr");
+
+        submitButton.addActionListener(this);
+
+        title.setFont(new Font("Consolas", Font.BOLD, 36));
         pIngred.setLayout(new FlowLayout());
         pIngred.setBackground(Color.lightGray);
         pRecipes.setBackground(Color.lightGray);
         pRecipes.setLayout(new FlowLayout());
-        submitButton.addActionListener(this);
-        title = new JLabel("FoodFindr");
 
-        title.setFont(new Font("Consolas", Font.BOLD, 36));
         this.add(ingredientsAdd);
         this.add(pIngred);
         this.add(pRecipes);
@@ -66,6 +71,7 @@ public class MainWindow extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e){
         
+        //checking if submit button was pressed and adding ingredient if it was pressed
         if(e.getSource() == submitButton && !ingredStrings.contains(ingredientsAdd.getText()))
         {
             pRecipes.removeAll();
@@ -83,6 +89,7 @@ public class MainWindow extends JFrame implements ActionListener
         }
         else
         {
+            //checking if recipe button was pressed and opening window with information about selected recipe
             for(JButton j : recipes)
             {
               
@@ -92,13 +99,15 @@ public class MainWindow extends JFrame implements ActionListener
                     System.out.println("worked");
                 }
             }
-            System.out.println("remove");
+            
+            //checking if ingredient button was pressed and removing it
             for(JButton n : ingredients)
             {
                 if(e.getSource() == n)
                 {
                     pIngred.remove(n);
                     ingredients.remove(n);
+
                     String s = n.getText();
                     System.out.println(s);
                     ingredStrings.remove(n.getText());
@@ -107,6 +116,7 @@ public class MainWindow extends JFrame implements ActionListener
                     buildQuery();
                     execQuery();
                     System.out.println(ingredStrings.size());
+
                     if(ingredStrings.isEmpty())
                     {
                         System.out.println("EMPTY");
@@ -120,6 +130,7 @@ public class MainWindow extends JFrame implements ActionListener
         }
     }
 
+    //function to build query from available ingredients
     public void buildQuery()
     {
         int i = 1;
@@ -135,6 +146,7 @@ public class MainWindow extends JFrame implements ActionListener
         }
     }
 
+    //function to use function "exec" of Connector class to execute query and create recipe buttons with added ingredients
     public void execQuery()
     {
         
@@ -157,7 +169,6 @@ public class MainWindow extends JFrame implements ActionListener
                 pRecipes.revalidate();
 
             }
-           
         } 
         catch (Exception e2) 
         {

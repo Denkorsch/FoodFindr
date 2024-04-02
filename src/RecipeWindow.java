@@ -26,6 +26,7 @@ public class RecipeWindow extends JFrame
     
     public RecipeWindow(Connector conn, String recipe)
     {
+        //recipe window settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000,800);
         this.setVisible(true);
@@ -41,14 +42,17 @@ public class RecipeWindow extends JFrame
         directions = new JTextArea("Directions:");
         link = new JTextArea("Link:");
         pan = new JPanel();
-        pan.setLayout(new GridLayout(5, 1));
-        pan.setBounds(50, 50, 900, 800);
+
+       
+
         pan.add(title);
         pan.add(ingredients);
         pan.add(directions);
         pan.add(link);
-
         this.add(pan);
+
+        pan.setLayout(new GridLayout(5, 1));
+        pan.setBounds(50, 50, 900, 800);
         title.setHorizontalAlignment(SwingConstants.CENTER);
         ingredients.setLineWrap(true);
         ingredients.setWrapStyleWord(true);
@@ -61,9 +65,11 @@ public class RecipeWindow extends JFrame
         title.setFont(new Font("Consolas", Font.BOLD, 35));
         link.setFont(new Font("Consolas", Font.BOLD, 15));
         link.setEditable(false);
+
         execQuery();
     }
 
+    //function to use function "exec" of Connector class to execute query and display recieved information about recipe
     public void execQuery()
     {
         queryStm = "SELECT * FROM full_dataset_recipes WHERE title LIKE '" + originRecipe + "'";
@@ -77,6 +83,7 @@ public class RecipeWindow extends JFrame
             Statement stmt = connec.createStatement();
             while(rSet.next())
             {
+                //setting labels to display recieved information about recipe
                 String s = rSet.getString("title");
                 title.setText(s);
                 s = rSet.getString("ingredients");

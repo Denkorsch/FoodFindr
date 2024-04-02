@@ -16,20 +16,22 @@ public class Connector {
         result = "";
         File file = new File("config.txt");
         Scanner sc;
-        try {
+
+        try 
+        {
             sc = new Scanner(file);
             while(sc.hasNext()) 
             {
-            if(user == null)
-            {
-                user = ""+ sc.nextLine();
-                System.out.println(user);
-            }
-            else if(pass == null)
-            {
-                pass = "" + sc.nextLine();
-                System.out.println(pass);
-            }
+                if(user == null)
+                {
+                    user = ""+ sc.nextLine();
+                    System.out.println(user);
+                }
+                else if(pass == null)
+                {
+                    pass = "" + sc.nextLine();
+                    System.out.println(pass);
+                }
             } 
         }
             catch (FileNotFoundException e) {
@@ -38,6 +40,7 @@ public class Connector {
         }
     }
 
+    //function to establish connection to db and execute query and return its result set
     public ResultSet exec(String quer)
     {
         try
@@ -58,11 +61,6 @@ public class Connector {
         }
         return rs;
         
-    }
-
-    public ResultSet getRS()
-    {
-        return rs;
     }
 
     public Connection getConnec()
